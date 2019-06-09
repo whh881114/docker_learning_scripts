@@ -24,7 +24,7 @@ int child_main(void* args)
     sethostname("NewNamespace", 12);
 
     cap_t caps;
-    printf("eUID = %d; eGID = %d\n", geteuid(), getegid());
+    printf("eUID = %ld; eGID = %ld\n", (long)geteuid(), (long)getegid());
 
     caps = cap_get_proc();
     printf("capabilities: %s\n", cap_to_text(caps, NULL));
