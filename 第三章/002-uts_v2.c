@@ -2,6 +2,8 @@
 // Created by Roy Wong on 2019/6/9.
 //
 
+#define _GNU_SOURCE
+
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <stdio.h>
@@ -9,7 +11,6 @@
 #include <signal.h>
 #include <unistd.h>
 
-#define _GNU_SOURCE
 #define STACK_SIZE (1024 * 1024)
 
 
