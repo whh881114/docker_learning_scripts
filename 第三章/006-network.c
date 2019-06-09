@@ -29,7 +29,7 @@ int main()
 {
     printf("程序开始：\n");
     printf("使用clone()来创建一个独立的namespace的进程，此时会进入子进程中。\n");
-    printf("此时演示的是IPC namespace功能。\n");
+    printf("此时演示的是Network namespace功能。\n");
     int child_pid = clone(child_main, child_stack + STACK_SIZE, CLONE_NEWNET | CLONE_NEWNS | CLONE_NEWPID | CLONE_NEWIPC | CLONE_NEWUTS | SIGCHLD, NULL);
     waitpid(child_pid, NULL, 0);
     printf("已退出子进程。\n");

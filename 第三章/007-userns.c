@@ -4,6 +4,7 @@
 
 #define _GNU_SOURCE
 
+#include <sys/capability.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <stdio.h>
@@ -21,6 +22,13 @@ int child_main(void* args)
 {
     printf("我们此时在子进程中！输入'exit'命令可以退出子进程，此时主机名已修改。\n");
     sethostname("NewNamespace", 12);
+
+    cap_t caps;
+    printf("eUID = %d; eGID = %d\n", geteuid(), getegid());
+
+    caps = cap_get_proc();
+    printf("capabilities: %s\n", cap_to_text(caps, NULL));
+
     execv(child_args[0], child_args);
     return 1;
 }
@@ -29,8 +37,8 @@ int main()
 {
     printf("程序开始：\n");
     printf("使用clone()来创建一个独立的namespace的进程，此时会进入子进程中。\n");
-    printf("此时演示的是PID namespace功能。\n");
-    int child_pid = clone(child_main, child_stack + STACK_SIZE, CLONE_NEWPID | CLONE_NEWIPC | CLONE_NEWUTS | SIGCHLD, NULL);
+    printf("此时演示的是User namespace功能。\n");
+    int child_pid = clone(child_main, child_stack + STACK_SIZE, CLONE_NEWUSER | CLONE_NEWNET | CLONE_NEWNS | CLONE_NEWPID | CLONE_NEWIPC | CLONE_NEWUTS | SIGCHLD, NULL);
     waitpid(child_pid, NULL, 0);
     printf("已退出子进程。\n");
     return 0;
