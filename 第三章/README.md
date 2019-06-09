@@ -19,3 +19,6 @@ IPC namespace演示IPC的隔离，运行程序前使用ipcmk -Q创建message que
 
 ##### 004-pid.c代码功能说明
 PID namespace表示PID隔离，不同的namespace中其pid可以和别的namespace下的相同。在运行程序后，进入了另一个namespace，输入echo $$可以看到pid为1。
+
+##### 005-mount.c代码功能说明
+MOUNT namespace表示文件挂载隔离，此时运行程序进入子进程后，先要执行mount -t proc proc /proc修复上次执行后带来的影响，然后运行ps -ef就只能看到两个进程，就看不到宿主机上的进程信息了，此时说明程序完成了所需的功能。
