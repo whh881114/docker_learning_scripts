@@ -16,3 +16,6 @@ fork()调用一次，却能够返回两次（父进程与子进程各返回一�
 
 ##### 003-ipc.c代码功能说明
 IPC namespace演示IPC的隔离，运行程序前使用ipcmk -Q创建message queue，然后使用ipcs -q可以查看结果，进入程序后，使用ipcs -q查看不到之前声明的message queue，这说明IPC隔离成功了。
+
+##### 004-pid.c代码功能说明
+PID namespace表示PID隔离，不同的namespace中其pid可以和别的namespace下的相同。在运行程序后，进入了另一个namespace，输入echo $$可以看到pid为1。
