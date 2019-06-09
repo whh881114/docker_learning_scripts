@@ -22,3 +22,6 @@ PID namespace表示PID隔离，不同的namespace中其pid可以和别的namespa
 
 ##### 005-mount.c代码功能说明
 MOUNT namespace表示文件挂载隔离，此时运行程序进入子进程后，先要执行mount -t proc proc /proc修复上次执行后带来的影响，然后运行ps -ef就只能看到两个进程，就看不到宿主机上的进程信息了，此时说明程序完成了所需的功能。
+
+##### 006-network.c代码功能说明
+NETWORK namespace用来隔离网络，进入程序后使用ip r命令看不到结果，说明成功了。在其他几个namespace中运行ip r命令后是可以正常输出的。
