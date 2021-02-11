@@ -21,7 +21,7 @@ char* const child_args[] = { "/bin/bash", NULL};
 int child_main(void* args)
 {
     printf("我们此时在子进程中！输入'exit'命令可以退出子进程，此时主机名已修改。\n");
-    sethostname("NewNamespace", 12);
+    sethostname("NewUserDemo", 12);
 
     cap_t caps;
     printf("eUID = %ld; eGID = %ld\n", (long)geteuid(), (long)getegid());
